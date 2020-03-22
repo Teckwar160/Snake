@@ -29,7 +29,7 @@ void PedazoSnake::pinta(char **tablero,bool cabeza){
     if(!cabeza){
         tablero[this -> y][this -> x] = this -> pieza;
     }else{
-        tablero[this -> y][this -> x] = '$';
+        tablero[this -> y][this -> x] = this -> cabeza;
     }
     
 }

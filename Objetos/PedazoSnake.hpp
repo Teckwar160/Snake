@@ -8,6 +8,7 @@ class PedazoSnake{
         size_t x;
         size_t y;
         char pieza = '*';
+        char cabeza = '>';
         int direccion = 'd';
     public:
         PedazoSnake(size_t x, size_t y);

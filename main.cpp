@@ -9,7 +9,7 @@ int main(){
     bool game = true;
     int Tecla = 0;
 
-    serpiente -> pinta(t -> getTablero());
+    serpiente -> pinta(t);
 
     while(game && Tecla != 'k'){
 
@@ -17,7 +17,7 @@ int main(){
             Tecla = getch();
             t -> muestra();
             serpiente -> mueve(t);
-            serpiente -> pinta(t -> getTablero());
+            serpiente -> pinta(t);
 
         }
     }

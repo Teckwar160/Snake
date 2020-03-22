@@ -29,10 +29,10 @@ bool Snake::crearPedazo(size_t x, size_t y){
 
 }
 
-void Snake::pinta(char **tablero){
+void Snake::pinta(Tablero *t){
 
     PedazoSnake *P;
-
+    char **tablero = t -> getTablero();
     this -> Pedazos -> CursorFirst();
 
     for(size_t i = 0; i< this -> Pedazos -> Len(); i++){

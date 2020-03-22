@@ -34,7 +34,7 @@ class Snake{
         ~Snake();
 
         bool crearPedazo(size_t x, size_t y);
-        void pinta(char **tablero);
+        void pinta(Tablero *t);
         void borrar(Tablero *t);
         void mueve(Tablero *t);
 
