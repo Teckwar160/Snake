@@ -1,18 +1,27 @@
 #include <iostream>
 #include "Objetos/Snake.hpp"
-#include "Objetos/Tablero.hpp"
+#include <conio.h>
 
 
 int main(){
-    Tablero *t = new Tablero(10,10);
+    Tablero *t = new Tablero(10,30);
     Snake *serpiente = new Snake();
-
-    t -> muestra();
-
-    std::cout << std::endl << std::endl;
+    bool game = true;
+    int Tecla = 0;
 
     serpiente -> pinta(t -> getTablero());
 
-    t -> muestra();
+    while(game && Tecla != 'k'){
+
+        if(kbhit()){
+            Tecla = getch();
+            t -> muestra();
+            serpiente -> mueve(t);
+            serpiente -> pinta(t -> getTablero());
+
+        }
+    }
+
     delete t;
+    delete serpiente;
 }

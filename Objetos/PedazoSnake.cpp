@@ -25,6 +25,19 @@ size_t PedazoSnake::getY(){
     return this -> y;
 }
 
-void PedazoSnake::pinta(char **tablero){
-    tablero[this -> y][this -> x] = this -> pieza;
+void PedazoSnake::pinta(char **tablero,bool cabeza){
+    if(!cabeza){
+        tablero[this -> y][this -> x] = this -> pieza;
+    }else{
+        tablero[this -> y][this -> x] = '$';
+    }
+    
+}
+
+void PedazoSnake::setDirrecion(int direccion){
+    this -> direccion = direccion;
+}
+
+int PedazoSnake::getDireccion(){
+    return this -> direccion;
 }

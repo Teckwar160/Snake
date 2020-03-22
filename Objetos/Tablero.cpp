@@ -1,3 +1,7 @@
+/**!<Guardas de inclusión*/
+#ifndef TABLERO_HPP
+#define TABLERO_HPP
+
 #include "Tablero.hpp"
 
 Tablero::Tablero(size_t filas, size_t columnas){
@@ -37,3 +41,15 @@ void Tablero::muestra(){
 char **Tablero::getTablero(){
     return this -> tablero;
 }
+
+size_t Tablero::getFilas(){
+    return this -> filas;
+}
+size_t Tablero::getColumnas(){
+    return this -> columnas;
+}
+
+char Tablero::getFondo(){
+    return this -> fondo;
+}
+#endif

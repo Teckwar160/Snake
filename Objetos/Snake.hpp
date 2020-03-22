@@ -4,9 +4,9 @@
 
 /**!<Bibliotecas necesarias*/
 #include <iostream>
-#include <conio.h>
 #include "PedazoSnake.hpp"
 #include "DLL.hpp"
+#include "Tablero.hpp"
 
 /**
  * @class Snake
@@ -19,6 +19,8 @@ class Snake{
     private:
         bool vive;
         size_t puntos;
+        int cabezaX;
+        int cabezaY;
         DLL<PedazoSnake*> *Pedazos;
     public:
         /**
@@ -33,6 +35,8 @@ class Snake{
 
         bool crearPedazo(size_t x, size_t y);
         void pinta(char **tablero);
+        void borrar(Tablero *t);
+        void mueve(Tablero *t);
 
 };
 

@@ -12,4 +12,7 @@ class Tablero{
         ~Tablero();
         void muestra();
         char **getTablero();
+        size_t getFilas();
+        size_t getColumnas();
+        char getFondo();
 };
