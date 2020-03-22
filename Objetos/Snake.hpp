@@ -7,6 +7,7 @@
 #include "PedazoSnake.hpp"
 #include "DLL.hpp"
 #include "Tablero.hpp"
+#include "Punto.hpp"
 
 /**
  * @class Snake
@@ -15,13 +16,13 @@
 class Snake{
     private:
         static void liberarPedazo(PedazoSnake *P);
-
+        static void liberarPunto(Punto *punto);
     private:
         bool vive;
         size_t puntos;
-        int cabezaX;
-        int cabezaY;
         DLL<PedazoSnake*> *Pedazos;
+        DLL<Punto*> *PuntosCriticos;
+
     public:
         /**
          *@brief Método constructor de Snake
@@ -36,6 +37,7 @@ class Snake{
         bool crearPedazo(size_t x, size_t y);
         void pinta(Tablero *t);
         void borrar(Tablero *t);
+        void movimiento(char Tecla);
         void mueve(Tablero *t);
 
 };

@@ -1,25 +1,28 @@
 #include <iostream>
 #include "Objetos/Snake.hpp"
 #include <conio.h>
-
+#include <stdlib.h>
 
 int main(){
-    Tablero *t = new Tablero(10,30);
+    Tablero *t = new Tablero(10,50);
     Snake *serpiente = new Snake();
     bool game = true;
-    int Tecla = 0;
+    char Tecla = 0;
 
     serpiente -> pinta(t);
 
     while(game && Tecla != 'k'){
+        t -> muestra();
 
         if(kbhit()){
             Tecla = getch();
-            t -> muestra();
-            serpiente -> mueve(t);
-            serpiente -> pinta(t);
 
+            serpiente -> movimiento(Tecla);
         }
+        serpiente -> mueve(t);
+        serpiente -> pinta(t);
+        system("cls");
+
     }
 
     delete t;

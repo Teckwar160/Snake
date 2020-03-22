@@ -34,10 +34,10 @@ void PedazoSnake::pinta(char **tablero,bool cabeza){
     
 }
 
-void PedazoSnake::setDirrecion(int direccion){
+void PedazoSnake::setDireccion(char direccion){
     this -> direccion = direccion;
 }
 
-int PedazoSnake::getDireccion(){
+char PedazoSnake::getDireccion(){
     return this -> direccion;
 }

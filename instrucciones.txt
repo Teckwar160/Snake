@@ -1,1 +1,1 @@
-g++ main.cpp Objetos/Snake.cpp Objetos/PedazoSnake.cpp Objetos/Tablero.cpp -o snake.exe
+g++ main.cpp Objetos/Snake.cpp Objetos/PedazoSnake.cpp Objetos/Tablero.cpp Objetos/Punto.cpp -o snake.exe

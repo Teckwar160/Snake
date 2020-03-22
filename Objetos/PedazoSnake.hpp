@@ -8,8 +8,8 @@ class PedazoSnake{
         size_t x;
         size_t y;
         char pieza = '*';
-        char cabeza = '>';
-        int direccion = 'd';
+        char cabeza = '$';
+        char direccion = 'd';
     public:
         PedazoSnake(size_t x, size_t y);
 
@@ -21,8 +21,8 @@ class PedazoSnake{
         void setY(size_t y);
         size_t getX();
         size_t getY();
-        void setDirrecion(int direccion);
-        int getDireccion();
+        void setDireccion(char direccion);
+        char getDireccion();
 };
 
 #endif

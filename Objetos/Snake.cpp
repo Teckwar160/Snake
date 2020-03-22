@@ -4,24 +4,27 @@ void Snake::liberarPedazo(PedazoSnake *P){
     delete P;
 }
 
+void Snake::liberarPunto(Punto *punto){
+    delete punto;
+}
+
 Snake::Snake(){
     this -> vive = true;
     this -> puntos = 0;
-    this -> Pedazos = new DLL<PedazoSnake *>();
+    this -> Pedazos = new DLL<PedazoSnake*>();
+    this -> PuntosCriticos = new DLL<Punto*>();
 
     /**!<Crea los pedazos iniciales de la Snake*/
     for(size_t i = 3; i>0; i--){
         this -> crearPedazo(i+5,5);
-
-        if(i == 3){
-            this -> cabezaX = i+5;
-            this -> cabezaY = 5;
-        }
     }
 }
 
 Snake::~Snake(){
    this -> Pedazos -> Traverse(this -> liberarPedazo);
+   this -> PuntosCriticos -> Traverse(this -> liberarPunto);
+   delete this -> Pedazos;
+   delete this -> PuntosCriticos;
 }
 
 bool Snake::crearPedazo(size_t x, size_t y){
@@ -63,28 +66,77 @@ void Snake::borrar(Tablero *t){
     }   
 }
 
+void Snake::movimiento(char Tecla){
+
+
+    if(Tecla == 'w' || Tecla == 'a' || Tecla == 's' || Tecla == 'd'){
+        
+        PedazoSnake *cabeza;
+
+        this -> Pedazos -> CursorFirst();
+
+        this -> Pedazos -> Peek(&cabeza);
+
+        if(cabeza -> getDireccion() != Tecla){
+            cabeza -> setDireccion(Tecla);
+
+            this -> PuntosCriticos -> InsertBack(new Punto(cabeza -> getX(),cabeza -> getY()));
+        }
+
+    }
+
+}
+
 void Snake::mueve(Tablero *t){
 
     PedazoSnake *P;
+    PedazoSnake *cabeza;
+    Punto *puntoCritico;
+    /*Limites del tablero*/
     int limiteX;
     int limiteY;
 
+    /*Para no dejar rastro*/
     this -> borrar(t);
 
+    /*Obtenemos los limites del tablero*/
     limiteX = t -> getColumnas();
     limiteY = t -> getFilas();
 
     this -> Pedazos -> CursorFirst();
+    this -> Pedazos -> Peek(&cabeza);
+
+    this -> PuntosCriticos -> CursorFirst();
 
     for(size_t i = 0; i<this -> Pedazos -> Len(); i++){
         this -> Pedazos -> Peek(&P);
 
+        /*Verificamos si el pedazo esta en un punto critico*/
+
+        for(size_t i = 0; i< this -> PuntosCriticos -> Len(); i++){
+
+            this -> PuntosCriticos -> Peek(&puntoCritico);
+
+            if(P -> getX() == puntoCritico -> getX() && P -> getY() == puntoCritico -> getY()){
+                P -> setDireccion(cabeza -> getDireccion());
+                puntoCritico -> incrementaContador();
+            }
+
+            if(puntoCritico -> getContador() == this -> Pedazos -> Len()){
+                this -> PuntosCriticos -> RemoveFront(&puntoCritico);
+            }
+
+            this -> PuntosCriticos -> CursorNext();
+        }
+
+
+        /*Movemos segun la dirección que tenga cada pedazo*/
         switch(P -> getDireccion()){
             case 'w':
                 if(P -> getY()-1 > 0){
                     P -> setY(P -> getY()-1);
                 }else{
-                    P -> setY(limiteY);
+                  P -> setY(limiteY-1);
                 }
                 
                 break;
@@ -92,7 +144,7 @@ void Snake::mueve(Tablero *t){
                 if(P -> getX()-1 > 0){
                     P -> setX(P -> getX()-1);
                 }else{
-                    P -> setX(limiteX);
+                    P -> setX(limiteX-1);
                 }
                 
                 break;
