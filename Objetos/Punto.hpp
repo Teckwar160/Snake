@@ -10,6 +10,6 @@ class Punto{
         ~Punto();
         size_t getX();
         size_t getY();
-        void incrementaContador();
+        void setContador(size_t contador);
         size_t getContador();
 };
