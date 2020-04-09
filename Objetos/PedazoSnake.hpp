@@ -5,22 +5,22 @@
 
 class PedazoSnake{
     private:
-        size_t x;
-        size_t y;
+        int x;
+        int y;
         char pieza = '*';
         char cabeza = '$';
         char direccion = 'd';
     public:
-        PedazoSnake(size_t x, size_t y);
+        PedazoSnake(int x, int y);
 
         ~PedazoSnake();
 
         void pinta(char **tablero,bool cabeza);
         
-        void setX(size_t x);
-        void setY(size_t y);
-        size_t getX();
-        size_t getY();
+        void setX(int x);
+        void setY(int y);
+        int getX();
+        int getY();
         void setDireccion(char direccion);
         char getDireccion();
 };

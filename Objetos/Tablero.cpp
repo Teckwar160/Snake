@@ -33,10 +33,9 @@ Tablero::~Tablero(){
 void Tablero::muestra(){
     for(size_t i =0; i <this -> filas; i++){
         for(size_t j = 0; j<this -> columnas; j++){
-            //std::cout << this -> tablero[i][j];
-            printf("%c",this -> tablero[i][j]);
+            printw("%c",this -> tablero[i][j]);
         }
-        std::cout << std::endl;
+        printw("\n");
     }
 }
 

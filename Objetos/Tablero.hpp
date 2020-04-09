@@ -1,11 +1,12 @@
 #include <iostream>
+#include <curses.h>
 
 class Tablero{
     private:
         size_t filas;
         size_t columnas;
         char **tablero;
-        char fondo = '0';
+        char fondo = '.';
     
     public:
         Tablero(size_t filas, size_t columnas);

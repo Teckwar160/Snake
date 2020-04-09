@@ -1,6 +1,6 @@
 #include "PedazoSnake.hpp"
 
-PedazoSnake::PedazoSnake(size_t x, size_t y){
+PedazoSnake::PedazoSnake(int x, int y){
     this -> x = x;
     this -> y = y;
 }
@@ -9,19 +9,19 @@ PedazoSnake::~PedazoSnake(){
     /*Destructro vacío*/
 }
 
-void PedazoSnake::setX(size_t x){
+void PedazoSnake::setX(int x){
     this -> x = x;
 }
 
-void PedazoSnake::setY(size_t y){
+void PedazoSnake::setY(int y){
     this -> y = y;
 }
 
-size_t PedazoSnake::getX(){
+int PedazoSnake::getX(){
     return this -> x;
 }
 
-size_t PedazoSnake::getY(){
+int PedazoSnake::getY(){
     return this -> y;
 }
 
