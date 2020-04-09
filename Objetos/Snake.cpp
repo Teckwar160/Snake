@@ -122,7 +122,6 @@ void Snake::movimiento(char Tecla){
 void Snake::mueve(Tablero *t){
 
     PedazoSnake *tmp;
-    int contador = 0;
 
     /*Obtenemos a la cabeza*/
     this -> Pedazos -> CursorFirst();
@@ -142,6 +141,7 @@ void Snake::mueve(Tablero *t){
         this -> Pedazos -> Peek(&tmp);
 
         this -> PuntosCriticos -> CursorFirst();
+
         /*Recorremos los puntos criticos*/
         for(size_t j = 0; j< this -> PuntosCriticos -> Len(); j++){
             this -> PuntosCriticos -> Peek(&puntoCritico);
@@ -152,18 +152,12 @@ void Snake::mueve(Tablero *t){
 
                     /*Actualizamos su dirección con la cabeza*/
                     tmp -> setDireccion(cabeza -> getDireccion());
-                    contador++;
                 }
             }
             this -> PuntosCriticos -> CursorNext();
         }
-        
-        if(contador == this -> Pedazos -> Len()-1){
-            this -> PuntosCriticos -> RemoveFront(&puntoCritico);
-            contador = 0;
-        }
            
-        this -> Pedazos -> CursorNext();     
+        this -> Pedazos -> CursorNext();           
     }
     /*------------------------------------------------------------------*/
 #endif
