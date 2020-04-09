@@ -1,9 +1,10 @@
 #include "Punto.hpp"
 
-Punto::Punto(int x, int y){
+Punto::Punto(int x, int y, char direccion){
     this -> x = x;
     this -> y = y;
     this -> contador = 0;
+    this -> direccion = direccion;
 }
 
 Punto::~Punto(){
@@ -23,4 +24,8 @@ void Punto::setContador(size_t contador){
 }
 size_t Punto::getContador(){
     return this -> contador;
+}
+
+char Punto::getDireccion(){
+	return this -> direccion;
 }

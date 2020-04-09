@@ -63,7 +63,7 @@ int main(){
         erase();
 
         /*Dormimos el hilo para que no haga cosas extrañas*/
-        std::this_thread::sleep_for (std::chrono::milliseconds(50));
+        std::this_thread::sleep_for (std::chrono::milliseconds(50/*50*/));
     }
 
     /*Fin del cambio de modo*/

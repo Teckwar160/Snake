@@ -16,7 +16,7 @@ Snake::Snake(){
     this -> PuntosCriticos = new DLL<Punto*>();
 
     /**!<Crea los pedazos iniciales de la Snake*/
-    for(size_t i = 6; i>0; i--){
+    for(size_t i = 20; i>0; i--){
         this -> crearPedazo(i+5,5);
     }
 }
@@ -113,7 +113,7 @@ void Snake::movimiento(char Tecla){
     /*---------------------*/
 
     /*Creamos al punto critico de movimiento*/
-    this -> PuntosCriticos ->InsertBack(new Punto(cabeza -> getX(),cabeza -> getY()));
+    this -> PuntosCriticos ->InsertBack(new Punto(cabeza -> getX(),cabeza -> getY(),cabeza -> getDireccion()));
 
 }
 
@@ -136,7 +136,7 @@ void Snake::mueve(Tablero *t){
     Punto *puntoCritico;
 
     /*Recorremos a los pedazos del cuerpo*/
-    for(size_t i = 0; i< this -> Pedazos -> Len() -1; i++){
+    for(size_t i = 1; i< this -> Pedazos -> Len(); i++){
 
         this -> Pedazos -> Peek(&tmp);
 
@@ -147,13 +147,22 @@ void Snake::mueve(Tablero *t){
             this -> PuntosCriticos -> Peek(&puntoCritico);
 
             /*Vemos si sus cordenadas son iguales*/
-            if(tmp -> getX() == puntoCritico -> getX()){
-                if(tmp -> getY() == puntoCritico -> getY()){
+            if(tmp -> getY() == puntoCritico -> getY()){
+                if(tmp -> getX() == puntoCritico -> getX()){
 
-                    /*Actualizamos su dirección con la cabeza*/
-                    tmp -> setDireccion(cabeza -> getDireccion());
+                    /*Actualizamos su dirección con la del punto*/
+                    tmp -> setDireccion(puntoCritico -> getDireccion());
+
+                    /*Aumentamos el contador del punto*/
+                    puntoCritico -> setContador(puntoCritico -> getContador()+1);
                 }
             }
+
+            /*Vemos si ya cumplio su cometido el punto*/
+            if(puntoCritico -> getContador() == this -> Pedazos -> Len()-1){
+                this -> PuntosCriticos -> RemoveFront(&puntoCritico);
+            }
+
             this -> PuntosCriticos -> CursorNext();
         }
            
