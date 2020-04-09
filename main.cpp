@@ -28,10 +28,11 @@ int kbhit()
 }
 
 int main(){
-#if 1
+
     Tablero *t = new Tablero(30,100);
+    char **tableroCopia;
     Snake *serpiente = new Snake();
-    bool game = true;
+    bool game = false;
     char Tecla = '0';
 
     serpiente -> pinta(t);
@@ -45,17 +46,21 @@ int main(){
 
     t -> muestra(); 
 
-    while(game && Tecla != 'k'){
+    while(!game && Tecla != 'k'){
+
+        /*Mostramos el tablero*/
         t -> muestra();
 
+        /*Cachamos la tecla precionada*/
         if(kbhit()){
             Tecla = getch();
             serpiente -> movimiento(Tecla);
         }
 
         /*Bloque de movimiento de serpiente*/
+        tableroCopia = t -> copiaTablero();
         serpiente -> borrar(t);
-        serpiente -> mueve(t);
+        game = serpiente -> mueve(t,tableroCopia);
         serpiente -> pinta(t);
         /*----------------------------------*/
 
@@ -64,12 +69,15 @@ int main(){
 
         /*Dormimos el hilo para que no haga cosas extrañas*/
         std::this_thread::sleep_for (std::chrono::milliseconds(50/*50*/));
+
     }
 
     /*Fin del cambio de modo*/
     endwin();
 
+    /*Liberamos la memoria*/
+    t -> borrarCopia(tableroCopia);
     delete t;
     delete serpiente;
-#endif
+
 }

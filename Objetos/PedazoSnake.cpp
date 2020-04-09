@@ -41,3 +41,7 @@ void PedazoSnake::setDireccion(char direccion){
 char PedazoSnake::getDireccion(){
     return this -> direccion;
 }
+
+char PedazoSnake::getPieza(){
+    return this -> pieza;
+}

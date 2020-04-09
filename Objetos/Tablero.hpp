@@ -16,4 +16,6 @@ class Tablero{
         size_t getFilas();
         size_t getColumnas();
         char getFondo();
+        char **copiaTablero();
+        void borrarCopia(char **copia);
 };

@@ -23,6 +23,7 @@ class PedazoSnake{
         int getY();
         void setDireccion(char direccion);
         char getDireccion();
+        char getPieza();
 };
 
 #endif

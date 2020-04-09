@@ -53,4 +53,30 @@ size_t Tablero::getColumnas(){
 char Tablero::getFondo(){
     return this -> fondo;
 }
+
+char **Tablero::copiaTablero(){
+    char **viejo = new  char*[this -> filas];
+
+    for(size_t i = 0; i< this -> filas; i++){
+        viejo[i] = new char[this -> columnas];
+    }
+
+    for(size_t i = 0; i<this -> filas; i++){
+        for(size_t j = 0; j<this -> columnas; j++){
+            viejo[i][j] = this -> tablero[i][j];
+        }
+    }
+
+    return viejo;
+
+}
+
+void Tablero::borrarCopia(char **copia){
+
+    for(size_t i = 0; i<this -> filas; i++){
+        delete[] copia[i];
+    }
+
+    delete[] copia;   
+}
 #endif

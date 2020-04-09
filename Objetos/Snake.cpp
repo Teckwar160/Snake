@@ -66,7 +66,7 @@ void Snake::borrar(Tablero *t){
         this -> Pedazos -> CursorNext();
     }   
 }
-bool Snake::actualizacion(char Tecla){
+void Snake::actualizacion(char Tecla){
 
     PedazoSnake *cabeza;
     char direccion;
@@ -92,19 +92,13 @@ bool Snake::actualizacion(char Tecla){
         if(direccion == 'd' && Tecla != 'a'){
             cabeza -> setDireccion(Tecla);
         }
-        
-
-        return true;
-
     }
-
-    return false;
 }
 
 void Snake::movimiento(char Tecla){
 
     /*Actualizamos la posicion de la cabeza*/
-    bool control = this -> actualizacion(Tecla);
+    this -> actualizacion(Tecla);
 
     /*Obtenemos a la cabeza*/
     this -> Pedazos -> CursorFirst();
@@ -119,21 +113,19 @@ void Snake::movimiento(char Tecla){
 
 
 
-void Snake::mueve(Tablero *t){
+bool Snake::mueve(Tablero *t,char **copia){
 
     PedazoSnake *tmp;
+    PedazoSnake *cabeza;
+    Punto *puntoCritico;
 
     /*Obtenemos a la cabeza*/
     this -> Pedazos -> CursorFirst();
-    PedazoSnake *cabeza;
     this -> Pedazos -> Peek(&cabeza);
     this -> Pedazos -> CursorNext();
-    /*----------------------*/
 
-
-#if 1
     /*Vemos si algun pedazo de la serpiente esta en un punto critico*/
-    Punto *puntoCritico;
+
 
     /*Recorremos a los pedazos del cuerpo*/
     for(size_t i = 1; i< this -> Pedazos -> Len(); i++){
@@ -168,11 +160,8 @@ void Snake::mueve(Tablero *t){
            
         this -> Pedazos -> CursorNext();           
     }
-    /*------------------------------------------------------------------*/
-#endif
 
     /*Movemos a la serpiente segun su dirección*/
-
     this -> Pedazos -> CursorFirst();
  
 
@@ -216,8 +205,28 @@ void Snake::mueve(Tablero *t){
                 break;
         }
 
+        if(i == 0){
+            if(this -> choco(copia)){
+                return true;
+            }
+        }
+
         this -> Pedazos -> CursorNext();
     }
+    return false;
+}
+
+bool Snake::choco(char **t){
+
+    this -> Pedazos -> CursorFirst();
+    PedazoSnake *cabeza;
+    this -> Pedazos -> Peek(&cabeza);
+
+    if(t[cabeza -> getY()][cabeza -> getX()] == cabeza -> getPieza()){
+        return true;
+    }
+
+    return false;
 
 }
 
