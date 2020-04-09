@@ -1,6 +1,6 @@
 #include "Punto.hpp"
 
-Punto::Punto(size_t x, size_t y){
+Punto::Punto(int x, int y){
     this -> x = x;
     this -> y = y;
     this -> contador = 0;
@@ -10,11 +10,11 @@ Punto::~Punto(){
 
 }
 
-size_t Punto::getX(){
+int Punto::getX(){
     return this -> x;
 }
 
-size_t Punto::getY(){
+int Punto::getY(){
     return this -> y;
 }
 

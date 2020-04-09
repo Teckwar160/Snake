@@ -38,7 +38,7 @@ class Snake{
         void pinta(Tablero *t);
         void borrar(Tablero *t);
         void movimiento(char Tecla);
-        void actualizacion(char Tecla);
+        bool actualizacion(char Tecla);
         void mueve(Tablero *t);
 
 };

@@ -2,14 +2,14 @@
 
 class Punto{
     private:
-        size_t x;
-        size_t y;
+        int x;
+        int y;
         size_t contador;
     public:
-        Punto(size_t x, size_t y);
+        Punto(int x, int y);
         ~Punto();
-        size_t getX();
-        size_t getY();
+        int getX();
+        int getY();
         void setContador(size_t contador);
         size_t getContador();
 };
