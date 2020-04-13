@@ -5,21 +5,50 @@
 #include "Tablero.hpp"
 #include <stdio.h>
 
-Tablero::Tablero(size_t filas, size_t columnas){
-    this -> filas = filas;
-    this -> columnas = columnas;
+Tablero::Tablero(){
+
+    /*Variables para leer el tablero*/
+    std::string direccionDimension = "Sprites/MedidasTablero.txt";
+    std::string direecionSprite = "Sprites/Tablero.txt";
+    std::ifstream sprite;
+    std::ifstream dimension;
+
+    /*Cargamos las dimensiones del tablero*/
+    dimension.open(direccionDimension,std::ios::in);
+
+    if(!dimension.fail()){
+        dimension >> this -> filas;
+        dimension >> this -> columnas;
+    }else{
+        std::cout << "Fallo #0" << std::endl;
+    }
+
+    dimension.close();
     
-    this -> tablero = new char*[this -> filas];
+    /*Cargamos el tablero*/
+    sprite.open(direecionSprite,std::ios::in);
 
-    for(size_t i = 0; i< this -> filas; i++){
-        this -> tablero[i] = new char[this -> columnas];
-    }
+    if(!sprite.fail()){
 
-    for(size_t i = 0; i<this -> filas; i++){
-        for(size_t j = 0; j<this -> columnas; j++){
-            this -> tablero[i][j] = this -> fondo;
+        /*Creamos a la matriz que llevara al tablero*/
+        this -> tablero = new char*[this -> filas];
+
+        for(size_t i = 0; i< this -> filas; i++){
+            this -> tablero[i] = new char[this -> columnas];
         }
+
+        /*Cargamos al tablero*/
+        for(size_t i = 0; i<this -> filas; i++){
+            for(size_t j = 0; j<this -> columnas; j++){
+                sprite >> this -> tablero[i][j];
+            }
+        }        
+    }else{
+        std::cout << "Fallo #1" << std::endl;
     }
+
+    sprite.close();
+
 }
 
 Tablero::~Tablero(){

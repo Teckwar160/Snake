@@ -1,5 +1,6 @@
 #include <iostream>
 #include <curses.h>
+#include <fstream>
 
 class Tablero{
     private:
@@ -9,7 +10,7 @@ class Tablero{
         char fondo = '.';
     
     public:
-        Tablero(size_t filas, size_t columnas);
+        Tablero();
         ~Tablero();
         void muestra();
         char **getTablero();

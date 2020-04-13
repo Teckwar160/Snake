@@ -29,7 +29,7 @@ int kbhit()
 
 int main(){
 
-    Tablero *t = new Tablero(30,100);
+    Tablero *t = new Tablero();
     char **tableroCopia;
     Snake *serpiente = new Snake();
     bool game = false;
