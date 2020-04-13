@@ -172,7 +172,7 @@ bool Snake::mueve(Tablero *t,char **copia){
             case 'w':
                 /*Se verifica si todavia esta en el tablero*/
                 if(tmp -> getY()-1 < 0){
-                    tmp -> setY(t -> getFilas()-1);
+                    tmp -> setY(t -> getFilas()-4);
                 }else{
                     tmp -> setY(tmp -> getY()-1);
                 }
@@ -187,7 +187,7 @@ bool Snake::mueve(Tablero *t,char **copia){
                 break;
             case 's':
                 /*Se verifica si todavia esta en el tablero*/
-                if(tmp -> getY()+1 > t -> getFilas()-1){
+                if(tmp -> getY()+1 > t -> getFilas()-4){
                     tmp -> setY(0);
                 }else{
                     tmp -> setY(tmp -> getY()+1);
