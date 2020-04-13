@@ -1,0 +1,1 @@
+.Game.Over..Pulsa.'k'.para.salir

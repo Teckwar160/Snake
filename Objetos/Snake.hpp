@@ -19,7 +19,7 @@ class Snake{
         static void liberarPunto(Punto *punto);
     private:
         bool vive;
-        size_t puntos;
+        size_t puntos = 0;
         DLL<PedazoSnake*> *Pedazos;
         DLL<Punto*> *PuntosCriticos;
 
@@ -42,6 +42,8 @@ class Snake{
         bool mueve(Tablero *t,char** viejo,bool*comida);
         bool choco(char **t,bool *comida);
         void crecerSnake();
+        void setPuntos(size_t puntos);
+        size_t getPuntos();
 
 };
 

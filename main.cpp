@@ -30,29 +30,40 @@ int kbhit()
 int main(){
 
     Tablero *t = new Tablero();
-    char **tableroCopia;
+    char **tableroCopia = nullptr;
     Snake *serpiente = new Snake();
     bool game = false;
     bool comida = false;
     char Tecla = '0';
-
-    serpiente -> pinta(t);
 
     /*Cambiamos el modo de pantalla para usar curses y la función kbhit*/
     initscr();
     cbreak();
     noecho();
     nodelay(stdscr, TRUE);
-    scrollok(stdscr, TRUE);   
+    scrollok(stdscr, TRUE);  
 
-    t -> muestra(); 
+    t -> mensaje('B');
+    t -> muestra();
+
+    /*Evitamos que se cierre el juego*/
+    while(Tecla != 'e' && Tecla != 'k'){
+        if(kbhit()){
+            Tecla = getch();
+        }
+    }    
+
+    t -> mensaje('b');
+
+    serpiente -> pinta(t);
     t -> generadorDeComida();
 
     while(!game && Tecla != 'k'){
 
         /*Mostramos el tablero*/
-        t -> muestra();
 
+        t -> mostrarPuntos(serpiente -> getPuntos());
+        t -> muestra();
         /*Prueba de comida*/
         if(comida){
             t -> generadorDeComida();
@@ -78,15 +89,44 @@ int main(){
         erase();
 
         /*Dormimos el hilo para que no haga cosas extrañas*/
-        std::this_thread::sleep_for (std::chrono::milliseconds(50/*50*/));
+        std::this_thread::sleep_for (std::chrono::milliseconds(70/*50*/));
+
+        if(serpiente -> getPuntos() == 1000){
+            game = true;
+        }
 
     }
+
+    if(game && serpiente -> getPuntos() < 1000){
+        t -> mensaje('G');
+        t -> muestra();
+
+        /*Evitamos que se cierre el juego*/
+        while(getch() != 'k'){
+            /*No necesitamos nada aquí*/
+        }   
+    }
+
+    if(game && serpiente -> getPuntos() == 1000){
+        t -> mensaje('W');
+        t -> muestra();
+
+        /*Evitamos que se cierre el juego*/
+        while(getch() != 'k'){
+            /*No necesitamos nada aquí*/
+        }   
+    }
+    
+
 
     /*Fin del cambio de modo*/
     endwin();
 
     /*Liberamos la memoria*/
-    t -> borrarCopia(tableroCopia);
+    if(tableroCopia != nullptr){
+       t -> borrarCopia(tableroCopia); 
+    }
+    
     delete t;
     delete serpiente;
 

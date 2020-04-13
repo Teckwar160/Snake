@@ -22,4 +22,6 @@ class Tablero{
         char **copiaTablero();
         void borrarCopia(char **copia);
         void generadorDeComida();
+        void mostrarPuntos(size_t puntos);
+        void mensaje(char comando);
 };

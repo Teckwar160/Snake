@@ -11,7 +11,7 @@ void Snake::liberarPunto(Punto *punto){
 
 Snake::Snake(){
     this -> vive = true;
-    this -> puntos = 0;
+    this -> puntos = 990;
     this -> Pedazos = new DLL<PedazoSnake*>();
     this -> PuntosCriticos = new DLL<Punto*>();
 
@@ -224,6 +224,7 @@ bool Snake::choco(char **t,bool*comida){
 
     if(t[cabeza -> getY()][cabeza -> getX()] == '@'){
         *comida = true;
+        this -> setPuntos(this -> getPuntos()+10);
     }
 
     if(t[cabeza -> getY()][cabeza -> getX()] == cabeza -> getPieza()){
@@ -265,5 +266,13 @@ void Snake::crecerSnake(){
     }
 
     this -> crearPedazo(x,y,cola -> getDireccion());
+}
+
+void Snake::setPuntos(size_t puntos){
+    this -> puntos = puntos;
+}
+
+size_t Snake::getPuntos(){
+    return this -> puntos;
 }
 

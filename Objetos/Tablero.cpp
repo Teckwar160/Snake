@@ -126,4 +126,67 @@ void Tablero::generadorDeComida(){
 
 
 }
+
+void Tablero::mostrarPuntos(size_t puntos){
+    
+    int puntosX = 12;
+    int puntosY = 28;
+
+    /*Separamos el numero*/
+    int millares = puntos/1000;
+    int centenas = (puntos - (millares *1000))/100;
+    int decenas = (puntos - (millares*1000 + centenas*100))/10;
+    int unidades = puntos -(millares*1000 + centenas*100 +decenas*10);
+
+    /*Actualizamos los puntos en el pantalla*/
+    this -> tablero[puntosY][puntosX] = '0' + unidades;
+    this -> tablero[puntosY][puntosX -1] = '0' + decenas;
+    this -> tablero[puntosY][puntosX -2] = '0' + centenas;
+    this -> tablero[puntosY][puntosX -3] = '0' + millares;
+
+}
+
+void Tablero::mensaje(char comando){
+
+    std::ifstream mensaje;
+    std::string dirreccionMensaje;
+    int x,y;
+
+    switch(comando){
+        case 'B':
+            dirreccionMensaje = "Sprites/Bienvenida.txt";
+            y=4;
+            x=0;
+            break;
+        case 'b':
+            dirreccionMensaje = "Sprites/Tablero.txt";
+            y = 0;
+            x = 0;
+            break;
+        case 'G':
+            dirreccionMensaje = "Sprites/GameOver.txt";
+            y=28;
+            x=63;
+            break;
+        case 'W':
+            dirreccionMensaje = "Sprites/Win.txt";
+            y=28;
+            x=63;       
+            break;
+    }
+
+    mensaje.open(dirreccionMensaje,std::ios::in);
+
+    if(!mensaje.fail()){
+        for(size_t i = 0; i<this -> filas; i++){
+            for(size_t j = 0; j<this -> columnas; j++){
+                mensaje >> this -> tablero[y+i][x+j];
+            }
+        }
+    }else{
+        std::cout << "Fallo #2" << std::endl;
+    }
+
+    mensaje.close();
+}
 #endif
