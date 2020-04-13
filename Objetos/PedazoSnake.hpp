@@ -9,9 +9,9 @@ class PedazoSnake{
         int y;
         char pieza = '*';
         char cabeza = '$';
-        char direccion = 'd';
+        char direccion;
     public:
-        PedazoSnake(int x, int y);
+        PedazoSnake(int x, int y, char direccion);
 
         ~PedazoSnake();
 

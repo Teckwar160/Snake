@@ -16,8 +16,8 @@ Snake::Snake(){
     this -> PuntosCriticos = new DLL<Punto*>();
 
     /**!<Crea los pedazos iniciales de la Snake*/
-    for(size_t i = 20; i>0; i--){
-        this -> crearPedazo(i+5,5);
+    for(size_t i = 3; i>0; i--){
+        this -> crearPedazo(i+5,5,'d');
     }
 }
 
@@ -28,8 +28,8 @@ Snake::~Snake(){
    delete this -> PuntosCriticos;
 }
 
-bool Snake::crearPedazo(int x, int y){
-    return this -> Pedazos -> InsertBack(new PedazoSnake(x,y));
+bool Snake::crearPedazo(int x, int y, char direccion){
+    return this -> Pedazos -> InsertBack(new PedazoSnake(x,y,direccion));
 
 }
 
@@ -113,7 +113,7 @@ void Snake::movimiento(char Tecla){
 
 
 
-bool Snake::mueve(Tablero *t,char **copia){
+bool Snake::mueve(Tablero *t,char **copia,bool *comida){
 
     PedazoSnake *tmp;
     PedazoSnake *cabeza;
@@ -206,7 +206,7 @@ bool Snake::mueve(Tablero *t,char **copia){
         }
 
         if(i == 0){
-            if(this -> choco(copia)){
+            if(this -> choco(copia,comida)){
                 return true;
             }
         }
@@ -216,11 +216,15 @@ bool Snake::mueve(Tablero *t,char **copia){
     return false;
 }
 
-bool Snake::choco(char **t){
+bool Snake::choco(char **t,bool*comida){
 
     this -> Pedazos -> CursorFirst();
     PedazoSnake *cabeza;
     this -> Pedazos -> Peek(&cabeza);
+
+    if(t[cabeza -> getY()][cabeza -> getX()] == '@'){
+        *comida = true;
+    }
 
     if(t[cabeza -> getY()][cabeza -> getX()] == cabeza -> getPieza()){
         return true;
@@ -228,5 +232,38 @@ bool Snake::choco(char **t){
 
     return false;
 
+}
+
+void Snake::crecerSnake(){
+
+    PedazoSnake *cola;
+    int x,y;
+
+    /*Obtenemos el ultimo elemento de la snake*/
+    this -> Pedazos -> CursorLast();
+    this -> Pedazos -> Peek(&cola);
+
+    /*Vemos la dirección que lleva*/
+
+    switch(cola -> getDireccion()){
+        case 'w':
+            x = cola -> getX();
+            y = cola -> getY()+1;
+            break;
+        case 'a':
+            x = cola -> getX()+1;
+            y = cola -> getY();
+            break;
+        case 's':
+            x = cola -> getX();
+            y = cola -> getY() -1;
+            break;
+        case 'd':
+            x = cola -> getX() -1;
+            y = cola -> getY();
+            break;
+    }
+
+    this -> crearPedazo(x,y,cola -> getDireccion());
 }
 

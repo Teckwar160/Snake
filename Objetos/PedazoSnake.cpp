@@ -1,8 +1,9 @@
 #include "PedazoSnake.hpp"
 
-PedazoSnake::PedazoSnake(int x, int y){
+PedazoSnake::PedazoSnake(int x, int y, char direccion){
     this -> x = x;
     this -> y = y;
+    this -> direccion = direccion;
 }
 
 PedazoSnake::~PedazoSnake(){

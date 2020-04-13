@@ -1,6 +1,7 @@
 #include <iostream>
 #include <curses.h>
 #include <fstream>
+#include <ctime>
 
 class Tablero{
     private:
@@ -8,6 +9,7 @@ class Tablero{
         size_t columnas;
         char **tablero;
         char fondo = '.';
+        char comida = '@';
     
     public:
         Tablero();
@@ -19,4 +21,5 @@ class Tablero{
         char getFondo();
         char **copiaTablero();
         void borrarCopia(char **copia);
+        void generadorDeComida();
 };

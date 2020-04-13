@@ -33,6 +33,7 @@ int main(){
     char **tableroCopia;
     Snake *serpiente = new Snake();
     bool game = false;
+    bool comida = false;
     char Tecla = '0';
 
     serpiente -> pinta(t);
@@ -45,11 +46,20 @@ int main(){
     scrollok(stdscr, TRUE);   
 
     t -> muestra(); 
+    t -> generadorDeComida();
 
     while(!game && Tecla != 'k'){
 
         /*Mostramos el tablero*/
         t -> muestra();
+
+        /*Prueba de comida*/
+        if(comida){
+            t -> generadorDeComida();
+            serpiente -> crecerSnake();
+            comida = false;
+        }
+        
 
         /*Cachamos la tecla precionada*/
         if(kbhit()){
@@ -60,7 +70,7 @@ int main(){
         /*Bloque de movimiento de serpiente*/
         tableroCopia = t -> copiaTablero();
         serpiente -> borrar(t);
-        game = serpiente -> mueve(t,tableroCopia);
+        game = serpiente -> mueve(t,tableroCopia,&comida);
         serpiente -> pinta(t);
         /*----------------------------------*/
 

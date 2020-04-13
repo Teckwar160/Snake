@@ -34,13 +34,14 @@ class Snake{
          */
         ~Snake();
 
-        bool crearPedazo(int x, int y);
+        bool crearPedazo(int x, int y, char direccion);
         void pinta(Tablero *t);
         void borrar(Tablero *t);
         void movimiento(char Tecla);
         void actualizacion(char Tecla);
-        bool mueve(Tablero *t,char** viejo);
-        bool choco(char **t);
+        bool mueve(Tablero *t,char** viejo,bool*comida);
+        bool choco(char **t,bool *comida);
+        void crecerSnake();
 
 };
 

@@ -108,4 +108,22 @@ void Tablero::borrarCopia(char **copia){
 
     delete[] copia;   
 }
+
+void Tablero::generadorDeComida(){
+
+    /*Limites en lso que puede aparecer la comida*/
+    int desdeX = 0, hastaX = 99;
+    int desdeY = 0, hastaY = 26;
+    int x,y;
+
+    srand(time(NULL));
+    x = rand()%(hastaX-desdeX+1)+ desdeX;
+    y = rand()%(hastaY-desdeY+1)+ desdeY;
+
+    /*Pintamos la comida*/
+    this -> tablero[y][x] = this -> comida;
+
+
+
+}
 #endif
